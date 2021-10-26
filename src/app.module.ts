@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
-import { TodoModule } from './todo/todo.module';
+import { TodoModule } from './modules/todo/todo.module';
 import { MongooseModule } from '@nestjs/mongoose'
 import { GraphQLModule } from '@nestjs/graphql';
+import { AuthModule } from './modules/auth/auth.module';
+
 
 @Module({
   imports: [
@@ -10,10 +12,11 @@ import { GraphQLModule } from '@nestjs/graphql';
       sortSchema: true,
       playground: true,
       debug: false,
+      context: ({ req }) => ({ headers: req.headers })
     }),
     MongooseModule.forRoot('mongodb://localhost/nest'),
-    TodoModule
+    TodoModule,
+    AuthModule,
   ],
-  providers: []
 })
 export class AppModule { }
