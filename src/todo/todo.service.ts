@@ -6,6 +6,7 @@ import { FilterTodoDto } from './dto/filter-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { TodoStatus } from './enums/todo-status.schema';
 import { Todo , TodoDocument, TodoSchema } from './schemas/todo.schema';
+import { Schema as MongooseSchema } from 'mongoose';
 
 @Injectable()
 export class TodoService {
@@ -16,6 +17,7 @@ export class TodoService {
         .sort({'createdAt' : 'desc'})
         .limit(query.limit);
         const total = await this.total({});
+        
         return {
             data,
             total
@@ -26,7 +28,7 @@ export class TodoService {
         return await this.model.count().where(where).exec();
     }
 
-    async findById(id: string): Promise<Todo>{
+    async findById(id: MongooseSchema.Types.ObjectId): Promise<Todo>{
         return await this.model.findById(id).exec();
     }
 
@@ -38,15 +40,15 @@ export class TodoService {
         })
     }
 
-    async update(id: string , updateTodoDto: UpdateTodoDto): Promise<Todo>{
+    async update(id: MongooseSchema.Types.ObjectId , updateTodoDto: UpdateTodoDto): Promise<Todo>{
         return await this.model.findByIdAndUpdate(id, updateTodoDto).exec();
     }
 
-    async updateStatus(id: string , status: TodoStatus){
+    async updateStatus(id: MongooseSchema.Types.ObjectId , status: TodoStatus){
         return await this.model.findByIdAndUpdate(id , { status, ...(status === TodoStatus.DONE ? { completedAt: new Date()} : {}) }).exec();
     }
 
-    async del(id: string): Promise<Todo>{
+    async del(id: MongooseSchema.Types.ObjectId): Promise<Todo>{
         return await this.model.findByIdAndDelete(id);
     }
 }
