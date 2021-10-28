@@ -18,7 +18,7 @@ export class TodoController implements OnModuleInit {
 
     onModuleInit() {
         this.service = this.client.getService<TodoService>('TodoService');
-      }
+    }
 
     @Get()
     @UsePipes(new ValidationPipe({transform: true}))
@@ -29,8 +29,6 @@ export class TodoController implements OnModuleInit {
     @Get(":id")
     @UsePipes(ValidationPipe)
     async findById(@Param() {_id}: FindIdParams) {
-        console.log(_id , "con");
-        
         const todo = await this.service.findById(_id);
         if (!todo) {
             throw new TodoNotFoundException(_id);
