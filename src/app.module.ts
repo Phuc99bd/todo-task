@@ -7,16 +7,9 @@ import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
-    GraphQLModule.forRoot({
-      autoSchemaFile: true,
-      sortSchema: true,
-      playground: true,
-      debug: false,
-      context: ({ req }) => ({ headers: req.headers })
-    }),
     MongooseModule.forRoot('mongodb://localhost/nest'),
     TodoModule,
-    AuthModule,
+    // AuthModule,
   ],
 })
 export class AppModule { }

@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package todos;
+
+message TodoId{
+    string id = 1;
+}
+
+service TodoService {
+    rpc findById(FindId) returns (Todo){}
+    rpc findAll(FilterAll) returns (ResponseGetAll){}
+    rpc create(CreateTodo) returns (Todo){}
+}
+
+message FindId{
+    int32 _id = 1;
+}
+
+message ResponseGetAll{
+    message Data{
+        repeated Todo data = 1;
+    }
+    Data data = 1;
+    int32 total = 2;
+}
+
+message FilterAll{
+    int32 page = 1;
+    int32 limit = 2;
+}
+
+message Todo{
+    string _id = 1;
+    string title = 2;
+    string description = 3;
+    string createdAt = 4;
+    string status = 5;
+    string completedAt = 6;
+}
+
+message CreateTodo{
+    string title = 1;
+    string description = 2;
+}
