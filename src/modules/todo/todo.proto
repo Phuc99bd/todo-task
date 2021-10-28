@@ -7,20 +7,22 @@ message TodoId{
 }
 
 service TodoService {
-    rpc findById(FindId) returns (Todo){}
-    rpc findAll(FilterAll) returns (ResponseGetAll){}
-    rpc create(CreateTodo) returns (Todo){}
+    rpc AddSubscriber (CreateSubscriberDto) returns (CreateSubscriberDto){}
+    rpc FindById (TodoId) returns (ResponseFindTodo){}
+    rpc FindAll (FilterAll) returns (ResponseGetAll){}
+    rpc Create (CreateTodo) returns (Todo){}
+    rpc Update (UpdateTodo) returns (Todo){}
+    rpc UpdateStatus(UpdateStatus) returns (Todo){}
+    rpc Del (TodoId) returns (Todo){}
 }
 
-message FindId{
-    int32 _id = 1;
+message CreateSubscriberDto {
+  string email = 1;
+  string name = 2;
 }
 
 message ResponseGetAll{
-    message Data{
-        repeated Todo data = 1;
-    }
-    Data data = 1;
+    repeated Todo data = 1;
     int32 total = 2;
 }
 
@@ -30,15 +32,35 @@ message FilterAll{
 }
 
 message Todo{
-    string _id = 1;
-    string title = 2;
-    string description = 3;
-    string createdAt = 4;
-    string status = 5;
-    string completedAt = 6;
+    optional string _id = 1;
+    optional string title = 2;
+    optional string description = 3;
+    optional string createdAt = 4;
+    optional string status = 5;
+    optional string completedAt = 6;
+}
+
+message ResponseFindTodo{
+    optional Todo data = 1;
+    string status = 2;
 }
 
 message CreateTodo{
     string title = 1;
     string description = 2;
+}
+
+message UpdateTodo{
+    TodoId params = 1;
+    BodyUpdateTodo updateTodoDto = 2;
+}
+
+message BodyUpdateTodo{
+    string title = 1;
+    string description = 2;
+}
+
+message UpdateStatus{
+    string id = 1;
+    string status = 2;
 }

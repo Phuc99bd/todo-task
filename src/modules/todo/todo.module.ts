@@ -15,6 +15,7 @@ import { TodoController } from './todo.controller';
         return ClientProxyFactory.create({
           transport: Transport.GRPC,
           options: {
+            url: 'localhost:3000',
             package: 'todos',
             protoPath: join(process.cwd(), 'src/modules/todo/todo.proto'),
           },

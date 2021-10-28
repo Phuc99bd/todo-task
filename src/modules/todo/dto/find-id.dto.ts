@@ -3,6 +3,11 @@ import { IsMongoId } from 'class-validator';
 import { Schema } from 'mongoose';
 
 export class FindIdParams{
-    @IsMongoId()
-    _id: string;
+    // @IsMongoId()
+    id: string;
+}
+
+export class CreateSubscriberDto{
+    email: string;
+    name: string;
 }
