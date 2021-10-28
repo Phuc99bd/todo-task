@@ -4,5 +4,10 @@ import { Schema } from 'mongoose';
 
 export class FindIdParams{
     @IsMongoId()
-    _id: string;
+    id: string;
+}
+
+export class CreateSubscriberDto{
+    email: string;
+    name: string;
 }

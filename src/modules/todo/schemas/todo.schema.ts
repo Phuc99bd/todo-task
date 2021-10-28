@@ -1,33 +1,33 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { TodoStatus } from '../enums/todo-status.schema';
+import { TodoStatus } from '../../../commons/enums/todo-status.enum';
 
 export type TodoDocument = Todo & Document;
-@ObjectType()
+// @ObjectType()
 @Schema()
 export class Todo {
-  @Field(() => String)
+  // @Field(() => String)
   _id: MongooseSchema.Types.ObjectId
 
   @Prop({ required: true })
-  @Field(() => String)
+  // @Field(() => String)
   title: string;
 
   @Prop()
-  @Field(() => String)
+  // @Field(() => String)
   description?: string;
 
   @Prop({ required: true })
-  @Field(() => String)
+  // @Field(() => String)
   status: TodoStatus
 
   @Prop()
-  @Field(() => Date)
+  // @Field(() => Date)
   completedAt?: Date;
 
   @Prop({ required: true })
-  @Field(() => Date)
+  // @Field(() => Date)
   createdAt: Date;
 
 }
