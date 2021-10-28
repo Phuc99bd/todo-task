@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Todo, TodoSchema } from './schemas/todo.schema';
-import { ConfigService,ConfigModule } from '@nestjs/config';
+import { ConfigService, ConfigModule } from '@nestjs/config';
 import { ClientProxyFactory, ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
-import { TodoController } from './todo.controller';
+import { TodoResolver } from './todo.resolver';
 
 @Module({
   providers: [
@@ -23,9 +23,10 @@ import { TodoController } from './todo.controller';
       },
       inject: [ConfigService],
     },
+    TodoResolver,
   ],
-  controllers: [TodoController],
+  controllers: [],
   imports: [
-    ClientsModule,ConfigModule]
+    ClientsModule, ConfigModule]
 })
-export class TodoModule {}
+export class TodoModule { }

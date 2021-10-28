@@ -4,6 +4,7 @@ import { TodoStatus } from '../enums/todo-status.schema';
 import { BaseTodoDto } from './base-todo.dto'
 import { FindIdParams } from './find-id.dto';
 
+@InputType()
 export class UpdateTodoDto extends BaseTodoDto{}
 
 export class BodyUpdateTodoDto{

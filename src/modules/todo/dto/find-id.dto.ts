@@ -2,8 +2,9 @@ import { ArgsType, Field, ObjectType } from '@nestjs/graphql';
 import { IsMongoId } from 'class-validator';
 import { Schema } from 'mongoose';
 
+@ArgsType()
 export class FindIdParams{
-    // @IsMongoId()
+    @IsMongoId()
     id: string;
 }
 
